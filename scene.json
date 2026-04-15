@@ -1,0 +1,26 @@
+{
+  "durationInFrames": 300,
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "background": "#2a0a1e",
+  "layers": [
+    {
+      "type": "text",
+      "text": "Replace this scene with ChatGPT output",
+      "startFrame": 0,
+      "endFrame": 300,
+      "animation": "fadeIn",
+      "style": {
+        "fontSize": 52,
+        "color": "#e8cc85",
+        "fontFamily": "Inter, sans-serif",
+        "fontWeight": "700",
+        "textAlign": "center",
+        "top": "45%",
+        "left": "5%",
+        "right": "5%"
+      }
+    }
+  ]
+}

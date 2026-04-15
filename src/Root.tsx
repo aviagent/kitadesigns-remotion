@@ -1,48 +1,18 @@
+import React from 'react';
 import {Composition} from 'remotion';
-import {CaptionOverlay} from './CaptionOverlay';
-import {IntroBranding} from './IntroBranding';
-import {CTAOutro} from './CTAOutro';
+import {DynamicScene} from './DynamicScene';
+import scene from '../scene.json';
 
 export const RemotionRoot: React.FC = () => {
   return (
-    <>
-      <Composition
-        id="CaptionOverlay"
-        component={CaptionOverlay}
-        durationInFrames={300}
-        fps={30}
-        width={1080}
-        height={1920}
-        defaultProps={{
-          captions: [
-            {text: 'Your caption here', startFrame: 0, endFrame: 90},
-            {text: 'Next caption line', startFrame: 90, endFrame: 180},
-          ],
-        }}
-      />
-      <Composition
-        id="IntroBranding"
-        component={IntroBranding}
-        durationInFrames={90}
-        fps={30}
-        width={1080}
-        height={1920}
-        defaultProps={{
-          tagline: 'AI Avatar Videos for Business',
-        }}
-      />
-      <Composition
-        id="CTAOutro"
-        component={CTAOutro}
-        durationInFrames={150}
-        fps={30}
-        width={1080}
-        height={1920}
-        defaultProps={{
-          cta: 'Get your video → kitadesigns.shop',
-          price: '$150 · Only 3 spots/month',
-        }}
-      />
-    </>
+    <Composition
+      id="DynamicScene"
+      component={DynamicScene}
+      durationInFrames={scene.durationInFrames ?? 300}
+      fps={scene.fps ?? 30}
+      width={scene.width ?? 1080}
+      height={scene.height ?? 1920}
+      defaultProps={{scene}}
+    />
   );
 };
