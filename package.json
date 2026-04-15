@@ -1,0 +1,21 @@
+{
+  "name": "kitadesigns-remotion",
+  "version": "1.0.0",
+  "description": "Kita Designs video editing with Remotion",
+  "scripts": {
+    "start": "remotion studio",
+    "render": "remotion render",
+    "build": "remotion render"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.448",
+    "@remotion/player": "4.0.448",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "remotion": "4.0.448"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "typescript": "5.0.4"
+  }
+}
