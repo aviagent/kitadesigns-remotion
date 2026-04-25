@@ -1,5 +1,12 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig, Sequence, OffthreadVideo} from 'remotion';
+import {AbsoluteFill, useCurrentFrame, interpolate, spring, useVideoConfig, Sequence, OffthreadVideo, staticFile} from 'remotion';
+
+// Resolve ./assets/... paths via staticFile() so Remotion's webpack public dir works
+function resolveSrc(src: string): string {
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  const relative = src.startsWith('./') ? src.slice(2) : src;
+  return staticFile(relative);
+}
 
 type Layer =
   | {type: 'text'; text: string; startFrame: number; endFrame: number; style?: React.CSSProperties; animation?: 'fadeIn' | 'slideUp' | 'none'}
@@ -46,7 +53,7 @@ const RectLayer: React.FC<{layer: Extract<Layer, {type: 'rect'}>}> = ({layer}) =
 const ImageLayer: React.FC<{layer: Extract<Layer, {type: 'image'}>}> = ({layer}) => {
   const frame = useCurrentFrame();
   if (frame < layer.startFrame || frame >= layer.endFrame) return null;
-  return <img src={layer.src} style={{position: 'absolute', opacity: layer.opacity ?? 1, ...layer.style}} />;
+  return <img src={resolveSrc(layer.src)} style={{position: 'absolute', opacity: layer.opacity ?? 1, ...layer.style}} />;
 };
 
 // Wraps in <Sequence> so the video always plays from frame 0 of the source file
@@ -58,7 +65,7 @@ const VideoLayer: React.FC<{layer: Extract<Layer, {type: 'video'}>}> = ({layer})
   return (
     <Sequence from={layer.startFrame} durationInFrames={duration}>
       <OffthreadVideo
-        src={layer.src}
+        src={resolveSrc(layer.src)}
         volume={layer.volume ?? 0}
         style={{position: 'absolute', opacity: layer.opacity ?? 1, ...layer.style}}
       />
